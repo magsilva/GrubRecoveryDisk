@@ -1,0 +1,61 @@
+color   =  2
+# foreground  = 3D FFFFFF
+# background  = 3D 0C55C3
+# viewport 3 2 77 22
+# shade 0
+# splashimage = (fd0)/boot/grub/splash.xpm.gz
+
+# Boot automatically after 30 secs.
+timeout 30
+
+# By default, boot the first entry.
+default 0
+
+# Fallback to the second entry.
+fallback 1
+
+# Enable serial support
+# serial --unit=0 --speed=9600
+# terminal serial
+
+title Floppy
+	pause  Insert the diskette now^G!!
+	rootnoverify (fd0)
+	chainloader +1
+	boot
+	
+title Hard disk
+	rootnoverify (hd0)
+	chainloader +1
+	boot
+	
+title CD-ROM
+	rootnoverify (cd0)
+	chainloader +1
+	boot
+
+title Network (bootp or dhcp)
+	bootp
+#	tftpserver <tftp server>.
+	root (nd)
+	kernel /vmlinuz rw root=/dev/ram ramdisk_size=4096 init=/bin/clone
+	initrd /initrd.gz
+	boot
+
+title Install GRUB into the hard disk
+	root    (hd0,0)
+	setup   (hd0)
+	boot
+
+title Play Space Invaders!
+	root (fd0)
+	kernel (fd0)/boot/invaders
+	boot
+
+title Memory Testing Utility
+	kernel = (fd0)/boot/memtest86
+	boot
+
+title Memory Testing Utility
+	kernel = (fd0)/boot/memtest86+
+	boot

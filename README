@@ -1,0 +1,42 @@
+GRUB HowTo
+
+Bootloaders are essencial for computers, bootstraping operational
+systems wherever they are installed: hard disk, network, floppy,
+cdrom. However, they are also a complex piece of software, in the
+sense that almost nobody knows how to use them at their fully
+capacity. A clear example of this is when the master boot record is
+cleared and the adopted solution is the reinstallation of the
+operational system.
+
+GRUB is one of the commonest bootloaders in the Linux world. It stands
+for GRand Unified Bootloader. Although it haven't got quite there, it
+carries a bag of tricks kidda cool. With a floppy disk, you can
+recover the boot record, resinstall grub, load the OS from the disk,
+over the network, CD-ROM, even from the same device you used to load
+GRUB.
+
+Unfortunately, most of GRUB's tricks are unknown to most of the
+people. To make life easier, and show off some of GRUB's capabilities,
+I created a boot disk that can boot from many devices and reinstall
+GRUB if needed. The purpose is not only demonstrate GRUB, but work as
+a recover disk.
+
+Actually, the real goal for this boot disk was to load the CD-ROM
+device (one connected to a IDE interface built in Sound Blaster 16)
+from my 486 computer: it's BIOS doesn't support CD-ROM devices, so I
+was using GRUB to try to recognize things. Well, I haven't gone so far
+and, actually, as GRUB relies on BIOS to detect the hardware, it will
+probably not work (may I can port some detection code from Linux, just
+enough to detect the cd-rom)
+
+The floppy disk image is available to download at the page's bottom.
+You can create it by yourself, it's quite easy:
+
+ 1. Take a floppy disk with no bad sectors.
+ 2. Run "grub-install /dev/fd0 --root-directory=boot/"
+ 3. Edit the file "boot/grub/menu.lst" as you wish.
+
+Now, the floppy image and the files available in it:
+  * Floppy disk image: grub_boot_disk.img
+  * Files within the disk image: grub, menu.lst, memtest86,
+ memtest86+, invaders
